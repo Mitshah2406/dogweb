@@ -1,0 +1,615 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap");
+
+* {
+  font-family: "Poppins", sans-serif;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  text-transform: capitalize;
+  text-decoration: none;
+  transition: all 0.2s linear;
+}
+
+$carrot-color: #e67e22;
+$black: #130f40;
+$white: #fff;
+$light-color: #666;
+$light-bg: #eee;
+$border: 0.2rem solid $black;
+$box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  scroll-padding-top: 4rem;
+  &::-webkit-scrollbar {
+    width: 1rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $carrot-color;
+    border-radius: 5rem;
+  }
+}
+
+@mixin d-flex($f-direction, $j-content, $a-items, $f-wrap) {
+  display: flex;
+  flex-direction: $f-direction;
+  justify-content: $j-content;
+  align-items: $a-items;
+  flex-wrap: $f-wrap;
+}
+@mixin grid($val) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax($val, 1fr));
+  gap: 1.5rem;
+}
+@mixin form-btn {
+  width: 100%;
+  text-align: center;
+
+  &:hover {
+    background: $black;
+  }
+}
+
+@mixin white-btn {
+  color: $white;
+  border-color: $white;
+
+  &:hover {
+    color: $black;
+  }
+
+  &::before {
+    background: $white;
+  }
+}
+
+// =============utility================================
+section {
+  padding: 5rem 9%;
+}
+.btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.8rem 2.8rem;
+  border-radius: 5rem;
+  border-top-left-radius: 0;
+  border: $border;
+  cursor: pointer;
+  background: none;
+  color: $black;
+  font-size: 1.7rem;
+  overflow: hidden;
+  z-index: 0;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: $black;
+    z-index: -1;
+    transition: 0.2s linear;
+    clip-path: circle(0% at 0% 5%);
+  }
+
+  &:hover::before {
+    clip-path: circle(100%);
+  }
+
+  &:hover {
+    color: $white;
+  }
+}
+.heading {
+  font-size: 4rem;
+  padding-bottom: 1rem;
+  text-align: center;
+  color: $black;
+  & span {
+    color: $carrot-color;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    transform: translateY(3rem);
+    opacity: 0;
+  }
+}
+// =============navbar================================
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  @include d-flex(row, space-between, center, nowrap);
+  background-color: $white;
+  padding: 2rem 9%;
+  z-index: 1000;
+  transform: translateY(-10rem);
+  box-shadow: $box-shadow;
+  &.active {
+    transform: translateY(0);
+  }
+  & .logo {
+    font-size: 2.3rem;
+    font-weight: bold;
+    color: $black;
+    i {
+      color: $carrot-color;
+    }
+  }
+  & .navlist a {
+    font-size: 1.6rem;
+    margin: 0 1rem;
+    color: $black;
+    &:hover {
+      color: $carrot-color;
+    }
+  }
+  & .icons {
+    & i {
+      font-size: 2.3rem;
+      font-weight: bold;
+      margin: 0 1rem;
+      &:hover {
+        color: $carrot-color;
+      }
+      &.fa-bars {
+        display: none;
+      }
+    }
+  }
+}
+
+// ==========login form================================
+.login-wrapper {
+  background-color: $white;
+  border-radius: 8px;
+  box-shadow: $box-shadow;
+  width: 35rem;
+  padding: 2rem;
+  position: absolute;
+  top: 120%;
+  right: 2rem;
+  display: none;
+  &.active {
+    display: block;
+    animation: fade-in 0.4s linear;
+  }
+  & .margin {
+    margin-bottom: 1.5rem;
+  }
+  & h3 {
+    font-size: 2.3rem;
+    color: $black;
+  }
+  & .email,
+  & .password {
+    border-bottom: 2px solid black;
+    & input {
+      font-size: 1.5rem;
+      color: $black;
+      padding: 1rem 0;
+    }
+  }
+  & p {
+    font-size: 1.5rem;
+    color: $black;
+  }
+  & .btn {
+    @include form-btn();
+  }
+  & .links {
+    @include d-flex(row, space-between, center, nowrap);
+    & p {
+      color: $carrot-color;
+      &:hover {
+        color: $black;
+      }
+    }
+  }
+}
+// ==========home================================
+
+.home {
+  min-height: 100vh;
+  width: 100%;
+  background: url(/image/home_bg_img.jpg) no-repeat;
+  background-position: center;
+  background-size: cover;
+  @include d-flex(row, flex-end, center, nowrap);
+  position: relative;
+  & .content {
+    width: 50rem;
+    & h3 {
+      color: $white;
+      font-size: 6rem;
+      padding-bottom: 1rem;
+      & span {
+        color: $carrot-color;
+      }
+    }
+  }
+  & .bottom-wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 12rem;
+  }
+  .btn {
+    @include white-btn();
+  }
+}
+// =============about sectipn================================
+.about .row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  & .image {
+    flex: 1 1 40rem;
+    img {
+      width: 100%;
+    }
+  }
+  & .content {
+    flex: 1 1 40rem;
+    & p {
+      color: $black;
+      line-height: 2.8rem;
+      padding-bottom: 1rem;
+      font-size: 1.6rem;
+    }
+  }
+}
+// =============dog/cat food section================================
+
+.dog-food,
+.cat-food {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 2rem 0;
+
+  .image {
+    flex: 1 1 40rem;
+    img {
+      width: 100%;
+    }
+  }
+
+  .content {
+    flex: 1 1 40rem;
+    text-align: center;
+    margin-right: 2rem;
+    p {
+      font-size: 1.6rem;
+      line-height: 2.8rem;
+      padding-bottom: 1rem;
+    }
+    .price {
+      color: $black;
+      font-size: 3rem;
+      padding-bottom: 1rem;
+    }
+    img {
+      height: 15rem;
+      margin-top: 1rem;
+      &:hover {
+        transform: rotate(15deg);
+      }
+    }
+  }
+}
+.cat-food {
+  flex-wrap: wrap-reverse;
+  .content {
+    margin-right: 0;
+    margin-left: 2rem;
+  }
+}
+// =============shop section================================
+
+.shop .box-container {
+  @include grid(30rem);
+  gap: 2.5rem;
+  .box {
+    position: relative;
+    overflow: hidden;
+    &:hover {
+      .image img {
+        transform: scale(1.1);
+      }
+      .icons {
+        transform: translateX(0rem);
+      }
+    }
+    .image {
+      height: 45rem;
+      width: 100%;
+      overflow: hidden;
+      border-radius: 8px;
+
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+    .icons {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      z-index: 10;
+      transform: translateX(10rem);
+      a {
+        display: block;
+        border-radius: 8px;
+        width: 5rem;
+        height: 5rem;
+        line-height: 5rem;
+        font-size: 2.2rem;
+        margin-top: 1rem;
+        background: $white;
+        color: $black;
+        text-align: center;
+        &:hover {
+          color: $carrot-color;
+          background-color: #130f40;
+        }
+      }
+    }
+    .content {
+      text-align: center;
+      padding: 1rem 0;
+      h3 {
+        font-size: 2.3rem;
+        color: $black;
+      }
+      .amount {
+        font-size: 1.5rem;
+        color: $carrot-color;
+      }
+    }
+  }
+}
+
+// ---------------services section----------------
+.services .box-container {
+  @include grid(30rem);
+  gap: 2.5rem;
+  .box {
+    background-color: $light-bg;
+    padding: 3rem;
+    text-align: center;
+    border-radius: 33% 67% 70% 30% / 30% 30% 70% 70%;
+    &:nth-child(even) {
+      border-radius: 79% 21% 81% 19% / 58% 93% 7% 42%;
+    }
+    &:hover {
+      border-radius: 8px;
+    }
+    i {
+      height: 6.5rem;
+      width: 6.5rem;
+      line-height: 6.5rem;
+      font-size: 3rem;
+      color: $white;
+      background: $carrot-color;
+      border-radius: 50%;
+      margin-bottom: 0.5rem;
+    }
+    h3 {
+      font-size: 2.3rem;
+      padding: 1rem 0;
+      color: #130f40;
+    }
+  }
+}
+// -plan section----------------------------------------------------------------
+
+.plan .box-container {
+  @include grid(30rem);
+  .box {
+    background-color: $light-bg;
+    border-radius: 8px;
+    box-shadow: $box-shadow;
+    padding: 3rem;
+    h3 {
+      color: $carrot-color;
+      font-size: 2.3rem;
+      text-align: center;
+      padding-bottom: 0.4rem;
+    }
+    h1 {
+      color: $black;
+      font-size: 3rem;
+      text-align: center;
+      padding-bottom: 2rem;
+    }
+    div.fas {
+      font-size: 5rem;
+      color: $carrot-color;
+      padding-bottom: 1.5rem;
+    }
+    .column {
+      @include d-flex(column, space-between, space-between, nowrap);
+      padding-bottom: 2.5rem;
+    }
+    .row,
+    .facility-tab {
+      @include d-flex(row, space-between, center, nowrap);
+    }
+    .facility-tab {
+      padding: 1rem 0;
+      p {
+        font-size: 1.7rem;
+        color: $black;
+      }
+      i {
+        color: $carrot-color;
+        font-size: 1.7rem;
+      }
+    }
+    .row {
+      .price {
+        color: $black;
+        font-size: 2.7rem;
+      }
+    }
+  }
+}
+
+// contact section----------------------------------------------------------------
+
+.contact {
+  padding: 5rem 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  .image {
+    flex: 1 1 40rem;
+    img {
+      width: 100%;
+    }
+  }
+  .content {
+    flex: 1 1 40rem;
+    margin: 0 10rem;
+    width: 70%;
+    padding-bottom: 1rem;
+    .form {
+      .input {
+        padding: 1rem 0;
+        margin: 0.8rem 0;
+        width: 100%;
+        border-bottom: 2px solid $black;
+        font-size: 1.7rem;
+      }
+      .input:nth-child(4) {
+        height: 12rem;
+        resize: none;
+      }
+      .input:nth-child(2) {
+        text-transform: lowercase;
+      }
+      input[type="number"]::-webkit-outer-spin-button,
+      input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+      }
+      .btn {
+        @include form-btn();
+      }
+    }
+  }
+}
+
+// footer----------------------------------------------------------------
+.footer {
+  background-color: $black;
+  position: relative;
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 10rem;
+    width: 100%;
+  }
+  .share {
+    padding: 6rem 0;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    .btn {
+      @include white-btn();
+    }
+  }
+  .credit {
+    color: $white;
+    font-size: 1.7rem;
+    text-align: center;
+    span {
+      color: $carrot-color;
+    }
+  }
+}
+
+// -media -queries----------------------------------------------------------------
+@media (max-width: 991px) {
+  html {
+    font-size: 55%;
+  }
+
+  .header {
+    padding: 2rem;
+  }
+
+  section {
+    padding: 5rem 2rem;
+  }
+
+  .home {
+    justify-content: center;
+    background-position: right;
+
+    .content {
+      text-align: center;
+      padding-bottom: 5rem;
+
+      h3 {
+        font-size: 4.5rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    #hamburger {
+      display: inline-block;
+    }
+    #hamburger.fa-times{
+      transform: rotate(180deg);
+    }
+    .navlist {
+      position: absolute;
+      top: 99%;
+      left: 0;
+      right: 0;
+      background: $white;
+      padding: 1rem 8rem;
+      border-bottom: 1px solid $black;
+      clip-path: polygon(0 0, 100% 0%, 100% 0, 0 0);
+      a {
+        display: block;
+        margin: 2rem 0;
+        font-size: 2rem;
+      }
+    }
+    .navlist.active{
+      clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
+    }
+  }
+}
+@media (max-width: 450px) {
+  html {
+    font-size: 50%;
+  }
+}
